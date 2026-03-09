@@ -1,0 +1,52 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<h2 class="text-center mb-4">Add Thesis</h2>
+
+<form method="POST">
+{% csrf_token %}
+
+<div class="mb-3">
+  <label class="form-label">Title</label>
+  <input type="text" class="form-control" name="title" required>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Abstract</label>
+  <textarea class="form-control" name="abstract" rows="4"></textarea>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Submission Year</label>
+  <input type="number" class="form-control" name="submission_year" required>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Status</label>
+  <select class="form-select" name="status" required>
+    <option value="Pending">Pending</option>
+    <option value="Approved">Approved</option>
+    <option value="Rejected">Rejected</option>
+  </select>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Student</label>
+  <select class="form-select" name="student" required>
+    {% for s in students %}
+    <option value="{{ s.student_id }}">{{ s.student_name }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Supervisor</label>
+  <select class="form-select" name="supervisor" required>
+    {% for sup in supervisors %}
+    <option value="{{ sup.supervisor_id }}">{{ sup.supervisor_name }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+<button type="submit" class="btn btn-info w-100">Save Thesis</button>
+</form>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<h2 class="text-center mb-4">Add Supervisor</h2>
+
+<form method="POST">
+{% csrf_token %}
+
+<div class="mb-3">
+  <label class="form-label">User Account (Optional)</label>
+  <select class="form-select" name="user">
+    <option value="">-- None --</option>
+    {% for u in users %}
+    <option value="{{ u.id }}">{{ u.username }} ({{ u.email }})</option>
+    {% endfor %}
+  </select>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Name</label>
+  <input type="text" class="form-control" name="supervisor_name" required>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Email</label>
+  <input type="email" class="form-control" name="email" required>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Designation</label>
+  <input type="text" class="form-control" name="designation">
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Department</label>
+  <select class="form-select" name="department" required>
+    {% for dept in departments %}
+    <option value="{{ dept.department_id }}">{{ dept.department_name }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+<button type="submit" class="btn btn-warning w-100">Save Supervisor</button>
+</form>
+{% endblock %}

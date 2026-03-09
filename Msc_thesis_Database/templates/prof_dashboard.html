@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Professor Dashboard</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-primary">
+<div class="container-fluid">
+<span class="navbar-brand">Professor Dashboard</span>
+<a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+</div>
+</nav>
+
+<div class="container mt-4">
+
+<h3>Welcome {{ request.user.username }}</h3>
+
+<div class="row mt-4">
+
+<div class="col-md-4">
+<div class="card bg-primary text-white">
+<div class="card-body">
+<h5>Total Theses</h5>
+<h2>{{ total }}</h2>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card bg-warning">
+<div class="card-body">
+<h5>Pending Approvals</h5>
+<h2>{{ pending }}</h2>
+</div>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card bg-success text-white">
+<div class="card-body">
+<h5>Approved Theses</h5>
+<h2>{{ approved }}</h2>
+</div>
+</div>
+</div>
+
+</div>
+
+<h4 class="mt-5">Assigned Theses</h4>
+
+<table class="table table-striped mt-3">
+
+<thead class="table-dark">
+<tr>
+<th>Student</th>
+<th>Title</th>
+<th>Status</th>
+<th>Year</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for thesis in theses %}
+
+<tr>
+<td>{{ thesis.student.student_name }}</td>
+<td>{{ thesis.title }}</td>
+
+<td>
+{% if thesis.status == "Approved" %}
+<span class="badge bg-success">Approved</span>
+{% elif thesis.status == "Pending" %}
+<span class="badge bg-warning text-dark">Pending</span>
+{% else %}
+<span class="badge bg-danger">Rejected</span>
+{% endif %}
+</td>
+
+<td>{{ thesis.submission_year }}</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+<td colspan="4" class="text-center">No assigned theses</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</body>
+</html>

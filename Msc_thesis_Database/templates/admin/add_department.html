@@ -1,0 +1,19 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<h2 class="text-center mb-4">Add Department</h2>
+
+<form method="POST">
+{% csrf_token %}
+<div class="mb-3">
+  <label class="form-label">Department Name</label>
+  <input type="text" class="form-control" name="department_name" required>
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Office Location</label>
+  <input type="text" class="form-control" name="office_location">
+</div>
+
+<button type="submit" class="btn btn-primary w-100">Save Department</button>
+</form>
+{% endblock %}
