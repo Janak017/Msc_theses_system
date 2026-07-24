@@ -37,7 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Legacy app (to be removed after migration)
     'thesis',
+    # New refactored apps
+    'apps.accounts.apps.AccountsConfig',
+    'apps.departments.apps.DepartmentsConfig',
+    'apps.students.apps.StudentsConfig',
+    'apps.supervisors.apps.SupervisorsConfig',
+    'apps.theses.apps.ThesesConfig',
+    'apps.common.apps.CommonConfig',
 ]
 
 MIDDLEWARE = [
